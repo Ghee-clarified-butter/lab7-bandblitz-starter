@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2017_09_25_172344) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_25_235709) do
   create_table "band_genres", force: :cascade do |t|
     t.integer "band_id"
     t.datetime "created_at", precision: nil, null: false
@@ -34,4 +34,19 @@ ActiveRecord::Schema[8.1].define(version: 2017_09_25_172344) do
     t.string "name"
     t.datetime "updated_at", precision: nil, null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.boolean "active"
+    t.integer "band_id", null: false
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "password_digest"
+    t.integer "role"
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_users_on_band_id"
+  end
+
+  add_foreign_key "users", "bands"
 end
